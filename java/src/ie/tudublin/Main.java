@@ -10,7 +10,7 @@ public class Main
 		penny.setName("Penny");
 		penny.speak();
 
-		Dog ginger = new Dog();
+		cat ginger = new cat();
 		for (int i = 0; i < 10; i++)
 		{
 			ginger.kill();
