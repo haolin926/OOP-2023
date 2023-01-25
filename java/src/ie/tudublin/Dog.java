@@ -22,16 +22,16 @@ public class Dog
 	{
 		System.out.println("Woof");
 	}
-	public void kill()
-	{
-		if (numLives > 0)
-		{
-			System.out.println("Ouch!");
-			numLives = numLives - 1;
-		}
-		else if (numLives == 0 )
-		{
-			System.out.println("Dead.");
-		}
-	}
+	// public void kill()
+	// {
+	// 	if (numLives > 0)
+	// 	{
+	// 		System.out.println("Ouch!");
+	// 		numLives = numLives - 1;
+	// 	}
+	// 	else if (numLives == 0 )
+	// 	{
+	// 		System.out.println("Dead.");
+	// 	}
+	// }
 }
