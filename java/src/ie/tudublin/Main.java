@@ -11,7 +11,8 @@ public class Main
 		penny.speak();
 
 		cat ginger = new cat();
-		for (int i = 0; i < 10; i++)
+		int numLives = ginger.getNumlives();
+		for (int i = 0; i < (numLives+1); i++)
 		{
 			ginger.kill();
 		}

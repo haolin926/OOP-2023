@@ -9,6 +9,10 @@ public class cat
     {
         this.name = name;
     }
+    public int getNumlives()
+    {
+        return numLives;
+    }
     public void kill()
     {
         if(numLives > 0)
