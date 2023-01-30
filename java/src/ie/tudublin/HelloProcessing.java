@@ -12,7 +12,7 @@ public class HelloProcessing extends PApplet
 
 	public void setup() {
 		// colorMode(HSB);
-		 background(0);
+		 background(240,87,87);
 
 		// x1 = random(0, width);
 		// x2 = random(0, width);
@@ -63,15 +63,20 @@ public class HelloProcessing extends PApplet
 		// {
 		// 	y2dir = - y2dir;
 		// }
-		stroke(255);
-		line(10,10,100,100);//x1,y1,x2,y2
-		circle(300,250,70);//cx,cy,d
-		fill(255,0,0);
-		rect(10,300,20,100);//top left x, top left y,w, h
-		stroke(127);
-		fill(255,255,0);
+		//line(10,10,100,100);//x1,y1,x2,y2
+		fill(23,205,242);
+		triangle(250, 0, 500, 450, 0, 450);
+		fill(242,234,23);
+		circle(250,270,300);//cx,cy,d
+		fill(255,255,255);
+
+		ellipse(250, 270, 200, 100);
 		noStroke();
+		fill(0,0,0);
+		circle(250,270,100);
 		noFill();
-		triangle(40, 90, 200, 40, 70, 70);
+		//fill(255,0,0);
+		//rect(10,300,20,100);//top left x, top left y,w, h
+
 	}
 }
