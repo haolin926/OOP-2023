@@ -93,14 +93,7 @@ public class BugZap extends PApplet
 			{
 				stroke(255);
 				line(playerX,playerY-20,playerX,0);
-
-				if(playerX > bugX - 20 && playerX < bugX + 20)
-				{
-					bugX = random(30,470);
-					bugY = 20;
-					System.out.println("hitted");
-					score++;
-				}
+				hitbug_chk();
 			}
 		}
 	}
@@ -111,6 +104,7 @@ public class BugZap extends PApplet
 			bugX = random(bugX - 20,bugX + 20);
 			bugY+=50;
 			System.out.println(bugY);
+
 		}
 		stroke(255);
 		fill(0);
@@ -127,8 +121,8 @@ public class BugZap extends PApplet
 	{
 		background(1);
 		fill(255);
-		textSize(40);
-		text("game over.Press space to restart", 250, 250);
+		textSize(30);
+		text("game over.Press space to restart\n\t\tScore:"+score, 60, 250);
 	}
 	public void score()
 	{
@@ -137,11 +131,20 @@ public class BugZap extends PApplet
 		text("Score:"+score,410,450);
 	}
 	public void splashscreen()
-	{
-
+	{//method is of the superclass but instance from the subclass ploymorphis
 		fill(255);
-		textSize(40);
-		text("Press space to start game.",250,250);
+		textSize(30);
+		text("Press space to start game.",100,250);
+	}
+	public void hitbug_chk()
+	{
+		if(playerX > bugX - 20 && playerX < bugX + 20)
+		{
+			bugX = random(30,470);
+			bugY = 20;
+			System.out.println("hitted");
+			score++;
+		}
 	}
 }
 
