@@ -117,8 +117,9 @@ public class Loops extends PApplet {
 			centerX = 50;
 			for(j=0;j<numcircles;j++)
 			{
+				//(i+j)*x: x decided how different are colour of circles
 				float c = ((i + j) /((numcircles - 1) * 2.0f))*255.0f;
-				float timec = (((i+j)*(frameCount%256)));
+				float timec = ((i+j)*5+(frameCount)) % 256.0f;
 
 				stroke(timec,255,255);
 				fill(timec,255,255);
@@ -187,6 +188,7 @@ public class Loops extends PApplet {
 		int i = 0;
 		int degree = 90;
 		int length = 300;
+		float center = width / 2.0f;
 		for(i=0;i<5;i++)
 		{
 			stroke(255);
@@ -194,8 +196,10 @@ public class Loops extends PApplet {
 			// circle(500,500,600);
 			// line(0,500,1000,500);
 			// line(500,0,500,1000);
-
-			line(500,500,(cos(degree*(PI/180))*length+500),(500-sin(degree*(PI/180))*length));
+			float opp, adja;
+			opp = center - sin(degree_to_rad(degree))*length;
+			adja = cos(degree_to_rad(degree))*length + center;
+			line(center,center,adja,opp);
 			degree+=72;
 
 		}
@@ -206,11 +210,19 @@ public class Loops extends PApplet {
 		int i = 0;
 		int degree = 90;
 		int length = 300;
+		int diff = 72;
 		
 		for(i=0;i<5;i++)
 		{
 			stroke(255);
-			line((cos(degree_to_rad(degree))*length+500),(500-sin(degree_to_rad(degree))*length),(cos(degree_to_rad(degree+72))*length+500),(500-sin(sin(degree_to_rad(degree)))*length));
+			float x1,y1,x2,y2;
+			x1 = cos(degree_to_rad(degree))*length+500;
+			x2 = cos(degree_to_rad(degree+diff))*length+500;
+			y1 = 500-(sin(degree_to_rad(degree))*length);
+			y2 = 500-(sin(degree_to_rad(degree+diff))*length);
+
+			line(x1,y1,x2,y2);
+			degree += diff;
 		}
 
 	}
@@ -218,6 +230,27 @@ public class Loops extends PApplet {
 	float degree_to_rad(int x)
 	{
 		return x*(PI/180);
+	}
+
+	void stars()
+	{
+		int i = 0;
+		int numstars = 20;
+		float centerX,centerY;
+		int star_angle;
+		for(i=0;i<numstars;i++)
+		{
+			star_angle = (int) random(5,9);
+			centerX = random(1000);
+			centerY = random(1000);
+			
+
+
+		}
+	}
+	void drawstars()
+	{
+
 	}
 
 	public void keyPressed() {
