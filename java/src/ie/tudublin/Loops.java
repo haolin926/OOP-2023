@@ -104,20 +104,28 @@ public class Loops extends PApplet {
 	{
 		int i = 0;
 		int j = 0;
-		int centerX = 50;
-		int centerY = 50;
+		// int numcircles = (int)(max(1,mouseX/50));
+		int numcircles = 20;
+		int centerX = (width / numcircles) / 2;
+		int centerY = (height / numcircles) / 2;
+		float diameter = width / (float)numcircles;
 
-		for(i=0;i<10;i++)
+		background(255);
+
+		for(i=0;i<numcircles;i++)
 		{
 			centerX = 50;
-			for(j=0;j<10;j++)
+			for(j=0;j<numcircles;j++)
 			{
-				stroke((i+j)*10,255,255);
-				fill((i+j)*10,255,255);
-				ellipse(centerX,centerY,100,100);
-				centerX+=100;
+				float c = ((i + j) /((numcircles - 1) * 2.0f))*255.0f;
+				float timec = (((i+j)*(frameCount%256)));
+
+				stroke(timec,255,255);
+				fill(timec,255,255);
+				ellipse(centerX,centerY,diameter,diameter);
+				centerX+=diameter;
 			}
-			centerY+=100;
+			centerY+=diameter;
 		}
 	}
 
@@ -177,19 +185,41 @@ public class Loops extends PApplet {
 	void sin_cos()
 	{
 		int i = 0;
-		int degree = 72;
+		int degree = 90;
+		int length = 300;
 		for(i=0;i<5;i++)
 		{
-			background(255);
-			stroke(0);
-			noFill();
-			circle(500,500,600);
-			line(0,500,1000,500);
-			line(500,0,500,1000);
-			// line(500,500,(cos(45)*300+300),(300-sin(45)*300));
-			line(500,500,(cos(90)*300+500),(500+sin(90)*300));
+			stroke(255);
+			// noFill();
+			// circle(500,500,600);
+			// line(0,500,1000,500);
+			// line(500,0,500,1000);
+
+			line(500,500,(cos(degree*(PI/180))*length+500),(500-sin(degree*(PI/180))*length));
+			degree+=72;
+
 		}
 	}
+
+	void sin_cos2()
+	{
+		int i = 0;
+		int degree = 90;
+		int length = 300;
+		
+		for(i=0;i<5;i++)
+		{
+			stroke(255);
+			line((cos(degree_to_rad(degree))*length+500),(500-sin(degree_to_rad(degree))*length),(cos(degree_to_rad(degree+72))*length+500),(500-sin(sin(degree_to_rad(degree)))*length));
+		}
+
+	}
+
+	float degree_to_rad(int x)
+	{
+		return x*(PI/180);
+	}
+
 	public void keyPressed() {
 		
 	}
@@ -199,6 +229,6 @@ public class Loops extends PApplet {
 		background(0);
 		fill(255);
 		//if_statement();
-		sin_cos();
+		loop6();
 	}
 }
