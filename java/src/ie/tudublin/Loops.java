@@ -145,12 +145,16 @@ public class Loops extends PApplet {
 		{
 			stroke(100,255,255);
 			
-			// textAlign(LEFT);
+			//text on left
 			textSize(30);
 			textAlign(RIGHT,CENTER);
-			text(num,(horizontal_x1-30),horizontal_y+10);
+			text(num,(horizontal_x1-30),horizontal_y);
+
+			//text on top
 			textAlign(CENTER,TOP);
 			text(num,vertical_x,vertical_y1-50);
+
+			//lines
 			line(horizontal_x1,horizontal_y,horizontal_x2,horizontal_y);
 			line(vertical_x,vertical_y1,vertical_x,vertical_y2);
 			vertical_x += 80;
@@ -244,6 +248,15 @@ public class Loops extends PApplet {
 			centerX = random(1000);
 			centerY = random(1000);
 			
+			for(i=0;i<star_angle;i++)
+			{
+				int x1,y1;//for out angle
+				int x2,y2;//for inner angle
+
+
+
+			}
+			
 
 
 		}
@@ -262,6 +275,6 @@ public class Loops extends PApplet {
 		background(0);
 		fill(255);
 		//if_statement();
-		loop6();
+		loop7();
 	}
 }
