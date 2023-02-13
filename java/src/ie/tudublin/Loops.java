@@ -239,20 +239,63 @@ public class Loops extends PApplet {
 	void stars()
 	{
 		int i = 0;
-		int numstars = 20;
-		float centerX,centerY;
-		int star_angle;
+		int numstars = 2;
+		int c=200;
+		float centerX,centerY,random_centerX,random_centerY;
+		centerX = (float)500.0;
+		centerY = (float)500.0;
+		int star_angle = 5;
+
+		//randomize the position of star
+		// centerX = random(1000);
+		// centerY = random(1000);
+		// c = (int)random(255);
+
+
 		for(i=0;i<numstars;i++)
 		{
-			star_angle = (int) random(5,9);
-			centerX = random(1000);
-			centerY = random(1000);
+			//star_angle = (int) random(5,9);
+			star_angle =(int)7;
+			//how many degree should angle increase to make a star
+			int diff = 360/star_angle;
+
+			int out_start_degree = 90;
+			int inner_start_degree = 270-(diff*2);
+
+			//randomize the length of star;
+			//int length = (int)random(50,150);
+			int length = 200;
+			float small_length = length / 3;
+
+			int num_jump = star_angle - 4;
 			
 			for(i=0;i<star_angle;i++)
 			{
-				int x1,y1;//for out angle
-				int x2,y2;//for inner angle
+				stroke(c,255,255);
+				float x1,y1,x2,y2;
+				float sx1,sx2,sy1,sy2;
+				//outer point
+				x1 = cos(degree_to_rad(out_start_degree))*length+centerX;
+				y1 = centerY-(sin(degree_to_rad(out_start_degree))*length);
+				x2 = cos(degree_to_rad(out_start_degree+diff))*length+centerX;
+				y2 = centerY-(sin(degree_to_rad(out_start_degree+diff))*length);
 
+
+				//inner point
+				sx1 = cos(degree_to_rad(inner_start_degree))*small_length+centerX;
+				sy1 = centerY-(sin(degree_to_rad(inner_start_degree))*small_length);
+				sx2 = cos(degree_to_rad(inner_start_degree-diff))*small_length+500;
+				sy2 = 500-(sin(degree_to_rad(inner_start_degree-diff))*small_length);
+
+				float sx3 =cos(degree_to_rad(inner_start_degree-num_jump*diff))*small_length+500;
+				float sy3 = 500-(sin(degree_to_rad(inner_start_degree-num_jump*diff))*small_length);
+	
+				// line(x1,y1,x2,y2);
+				// line(sx2,sy2,sx1,sy1);
+				line(x1,y1,sx1,sy1);
+				line(x1,y1,sx3,sy3);
+				out_start_degree += diff;
+				inner_start_degree += diff;
 
 
 			}
@@ -275,6 +318,6 @@ public class Loops extends PApplet {
 		background(0);
 		fill(255);
 		//if_statement();
-		loop7();
+		stars();
 	}
 }
