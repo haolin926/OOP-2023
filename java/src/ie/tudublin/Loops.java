@@ -296,12 +296,7 @@ public class Loops extends PApplet {
 				line(x1,y1,sx3,sy3);
 				out_start_degree += diff;
 				inner_start_degree += diff;
-
-
 			}
-			
-
-
 		}
 	}
 	void drawstars()
