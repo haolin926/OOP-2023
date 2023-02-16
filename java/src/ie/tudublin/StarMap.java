@@ -151,7 +151,7 @@ public class StarMap extends PApplet
 
 		for(int i = -5; i <= 5;i++)
 		{
-			//x = map(i,-5,5,LBborder,width - LBborder)
+			//x = map(i,-5,5,LRborder,width - LRborder)
 			float x = LRborder + (LRgap*(i+5));
 			float y = TBborder + (TBgap*(i+5));
 
@@ -173,6 +173,6 @@ public class StarMap extends PApplet
 	}
 	float map1(float a,float b,float c,float d,float e)
 	{
-		return a/(b-c)*(e-d);
+		return (a-b)/(c-b)*(e-d);
 	}
 }
