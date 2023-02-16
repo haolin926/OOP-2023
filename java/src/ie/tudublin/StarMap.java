@@ -41,12 +41,13 @@ public class StarMap extends PApplet
 			System.out.println(stars.get(i));
 		}
 	}
+	//not incapsulated
 	void plotStar()
 	{
 		for(Star i : stars)
 		{
-			float x = map(i.xG,-5,5,50,width);
-			float y = map(i.yG,-5,5,50,width);
+			float x = map(i.getxG(),-5,5,50,width);
+			float y = map(i.getyG(),-5,5,50,width);
 
 			stroke(50,255,255);
 			line(x-5,y,x+5,y);
@@ -54,46 +55,83 @@ public class StarMap extends PApplet
 
 			textAlign(LEFT,CENTER);
 			textSize(15);
-			text(i.displayName,x+20,y);
+			text(i.getDisplayName(),x+20,y);
 			stroke(10,255,255);
 			noFill();
-			circle(x,y,(i.distance)*5);
+			circle(x,y,(i.getDistance())*5);
+		}
+	}
+
+	void plotstars_2()
+	{
+		for(Star i :stars)
+		{
+			i.render(this);
 		}
 	}
 	float origin_X;
 	float origin_Y;
-	boolean pressed;
+	float endX;
+	float endY;
+	boolean pressed = false;
+	int x = 0;
 	public void mousePressed()
 	{
-		if(mousePressed==true)
-		{
-			origin_X = mouseX;
-			origin_Y = mouseY;
-			pressed = true;
+		switch(x){
+			case 0:
+				if(mousePressed==true)
+				{
+					origin_X = mouseX;
+					origin_Y = mouseY;
+					x = 1;
+				}
+				break;
+			case 1:
+				stroke(30,255,255);
+				line(mouseX,mouseY,origin_X,origin_Y);
+				if(mousePressed)
+				{
+					endX = mouseX;
+					endY = mouseY;
+					x = 2;
+				}
+				break;
+			case 2:
+				if(mousePressed)
+				{
+					x = 0;
+				}
+				break;
+			default:
+				break;
 		}
 	}
 
 	void drawLine()
 	{
+		if ( x == 1)
+		{
+		text("Origin position: (" + origin_X + origin_Y + ")",20,970);
 		stroke(30,255,255);
-		float distance = dist(mouseX,mouseY,origin_X,origin_Y);
-		text(distance,20,970);
 		line(mouseX,mouseY,origin_X,origin_Y);
+		}
+		else if (x == 2)
+		{
+			stroke(30,255,255);
+			line(endX,endY,origin_X,origin_Y);
+			float distance = dist(origin_X,origin_Y,endX,endY);
+			text("Distance: "+distance,20,970);
+		}
 	}
 
 		
 	public void draw()
 	{	
-		strokeWeight(2);
+		strokeWeight(1);
 		background(0);
 		drawGrid2();
-		plotStar();
-		mousePressed();
-		if(pressed == true)
-		{
-			drawLine();
-
-		}
+		plotstars_2();
+		drawLine();
 	}
 
 	void drawGrid2()
@@ -113,6 +151,7 @@ public class StarMap extends PApplet
 
 		for(int i = -5; i <= 5;i++)
 		{
+			//x = map(i,-5,5,LBborder,width - LBborder)
 			float x = LRborder + (LRgap*(i+5));
 			float y = TBborder + (TBgap*(i+5));
 
@@ -131,5 +170,9 @@ public class StarMap extends PApplet
 
 		}
 
+	}
+	float map1(float a,float b,float c,float d,float e)
+	{
+		return a/(b-c)*(e-d);
 	}
 }
