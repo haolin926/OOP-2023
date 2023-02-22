@@ -79,6 +79,14 @@ public class Audio1 extends PApplet
         float cx = width / 2;
         float cy = height / 2;
 
+        //for line on left right
+        float left = cx - 250.0f;
+        float top = cy - 250.0f;
+
+        //for line on top bottom
+        float top2 = cy - 250.0f;
+        float left2 = cy - 250.0f;
+
         switch (mode) {
 			case 0:
                 background(0);
@@ -121,12 +129,12 @@ public class Audio1 extends PApplet
                 background(0);
                 for(int i = 0; i<ab.size(); i++)
                 {
-                    float c = map(smoothedAmplitude,0,0.5f,0,255);
+                    float c = map(smoothedAmplitude,0,1,0,255);
+                    float r = map(smoothedAmplitude,0,0.5f,100,2000);
                     stroke(c,255,255);
-                    float f = ab.get(i) * halfH;
 
                     noFill();
-                    circle(cx,cy,smoothedAmplitude*1000);
+                    circle(cx,cy,r);
                 }
                 break;
             case 4:
@@ -134,15 +142,47 @@ public class Audio1 extends PApplet
                 for(int i = 0; i<ab.size(); i++)
                 {
                     float c = map(smoothedAmplitude,0,1,0,255);
-                    float r = map(smoothedAmplitude,0,0.5f,100,2000);
+                    float r = map(smoothedAmplitude,0,0.5f,100,1000);
                     stroke(c,255,255);
-                    float f = ab.get(i) * halfH;
 
                     noFill();
                     rectMode(CENTER);
                     rect(cx,cy,r,r);
                 }
                 break;
+            
+            case 5:
+                background(0);
+                for(int i = 0; i<ab.size();i++)
+                {
+                    float c = map(smoothedAmplitude,0,1,0,255);
+                    
+                    float r = map(smoothedAmplitude,0,0.5f,100,1000);
+                    float f = ab.get(i) * halfH;
+                    float lerpf = lerp(f,average,0.1f);
+
+                    
+
+                    stroke(c,255,255);
+
+                    noFill();
+                    rectMode(CENTER);
+                    rect(cx,cy,500,500);
+
+
+                    line(left,top,left-abs(f),top);
+                    line(left+500,top,left+500+abs(f),top);
+                    if(top <= 750)
+                    {
+                        top++;
+                    }
+                    line(left2,top,left2,top-abs(f));
+                    line(left2,top+500,left2,top+500+abs(f));
+                    if(left <= 750)
+                    {
+                        left++;
+                    }
+                }
                 
             
                 
