@@ -176,11 +176,11 @@ public class Audio1 extends PApplet
                     {
                         top++;
                     }
-                    line(left2,top,left2,top-abs(f));
-                    line(left2,top+500,left2,top+500+abs(f));
-                    if(left <= 750)
+                    line(left2,top2,left2,top2-abs(f));
+                    line(left2,top2+500,left2,top2+500+abs(f));
+                    if(left2 <= 750)
                     {
-                        left++;
+                        left2++;
                     }
                 }
                 
