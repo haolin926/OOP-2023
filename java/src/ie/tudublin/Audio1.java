@@ -116,8 +116,8 @@ public class Audio1 extends PApplet
                     line(i,0,i,f);
                     line(i,height,i,height - f);
                 }
+                break;
             case 3:
-            {
                 background(0);
                 for(int i = 0; i<ab.size(); i++)
                 {
@@ -128,7 +128,23 @@ public class Audio1 extends PApplet
                     noFill();
                     circle(cx,cy,smoothedAmplitude*1000);
                 }
-            }
+                break;
+            case 4:
+                background(0);
+                for(int i = 0; i<ab.size(); i++)
+                {
+                    float c = map(smoothedAmplitude,0,1,0,255);
+                    float r = map(smoothedAmplitude,0,0.5f,100,2000);
+                    stroke(c,255,255);
+                    float f = ab.get(i) * halfH;
+
+                    noFill();
+                    rectMode(CENTER);
+                    rect(cx,cy,r,r);
+                }
+                break;
+                
+            
                 
 
         }
