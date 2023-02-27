@@ -66,11 +66,13 @@ public class Audio1 extends PApplet
         float average = 0;
         float sum = 0;
         off += 1;
+        float[] lerpedbuffer = new float[1024];
         // Calculate sum and average of the samples
         // Also lerp each element of buffer;
         for(int i = 0 ; i < ab.size() ; i ++)
         {
             sum += abs(ab.get(i));
+            lerpedbuffer[i] = lerp(lerpedbuffer[i], ab.get(i),0.1f);
         }
         average= sum / (float) ab.size();
 
@@ -95,7 +97,7 @@ public class Audio1 extends PApplet
                     //float c = map(ab.get(i), -1, 1, 0, 255);
                     float c = map(i, 0, ab.size(), 0, 255);
                     stroke(c, 255, 255);
-                    float f = ab.get(i) * halfH;
+                    float f = lerpedbuffer[i] * halfH;
                     line(i, halfH + f, i, halfH - f);                    
                 }
                 break;
@@ -116,7 +118,7 @@ public class Audio1 extends PApplet
                 {
                     float c = map(i,0,ab.size(),0,255);
                     stroke(c,255,255);
-                    float f = ab.get(i) * halfH;
+                    float f = lerpedbuffer[i] * halfH * 4.0f;
 
                     //x must 0, f
                     line(0,i,f,i);
@@ -156,11 +158,14 @@ public class Audio1 extends PApplet
                 for(int i = 0; i<ab.size();i++)
                 {
                     float c = map(smoothedAmplitude,0,1,0,255);
-                    
+                    float linec = map(i,0,ab.size(),0,255);
+                    linec = (linec+off)%256;
                     float r = map(smoothedAmplitude,0,0.5f,100,1000);
                     float f = ab.get(i) * halfH;
                     float lerpf = lerp(f,average,0.1f);
-
+                    stroke(100,255,255);
+                    float rad_i = (float)(i * Math.PI / 180.0f);
+                    line(500+cos(rad_i)*300,500+sin(rad_i)*300,500+cos(rad_i)*300,500+sin(rad_i)*300);
                     
 
                     stroke(c,255,255);
@@ -169,16 +174,16 @@ public class Audio1 extends PApplet
                     rectMode(CENTER);
                     rect(cx,cy,500,500);
 
-
-                    line(left,top,left-abs(f),top);
-                    line(left+500,top,left+500+abs(f),top);
+                    stroke(linec,255,255);
+                    line(left,top,left-abs(lerpf)/3,top);
+                    line(left+500,top,left+500+abs(lerpf)/3,top);
                     if(top <= 750)
                     {
                         top++;
                     }
-                    line(left2,top2,left2,top2-abs(f));
-                    line(left2,top2+500,left2,top2+500+abs(f));
-                    if(left2 <= 750)
+                    line(left2,top2,left2,top2-abs(lerpf)/3);
+                    line(left2,top2+500,left2,top2+500+abs(lerpf)/3);
+                    if(left2 <= 762)
                     {
                         left2++;
                     }
