@@ -16,6 +16,7 @@ public class Audio2 extends PApplet{
     AudioBuffer ab;
 
     FFT fft;
+    PitchSpeller ps;
 
     public void settings()
     {
@@ -25,9 +26,13 @@ public class Audio2 extends PApplet{
     public void setup()
     {
         m = new Minim(this);
-        ai = m.getLineIn(Minim.MONO, width, 44100, 16);
-        ab = ai.mix;
+        // ai = m.getLineIn(Minim.MONO, width, 44100, 16);
+        // ab = ai.mix;
         lerpedBuffer = new float[width];
+        ps = new PitchSpeller();
+        ap = m.loadFile("scale.wav", 1024);
+        ap.play();
+        ab = ap.mix;
 
         fft = new FFT(width, 44100);
     }
@@ -39,13 +44,13 @@ public class Audio2 extends PApplet{
         colorMode(HSB);
         stroke(255);
         float half = height / 2;
-        for(int i = 0 ; i < ab.size() ; i ++)
-        {
-            stroke(map(i, 0, ab.size(), 0, 255), 255, 255);
-            lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.05f);
-            float f = abs(lerpedBuffer[i] * half * 2.0f);
-            line(i, half + f, i, half - f);
-        }
+        // for(int i = 0 ; i < ab.size() ; i ++)
+        // {
+        //     stroke(map(i, 0, ab.size(), 0, 255), 255, 255);
+        //     lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.05f);
+        //     float f = abs(lerpedBuffer[i] * half * 2.0f);
+        //     line(i, half + f, i, half - f);
+        // }
 
         fft.forward(ab);
         stroke(255);
@@ -53,7 +58,7 @@ public class Audio2 extends PApplet{
         int highestIndex = 0;
         for(int i = 0 ;i < fft.specSize() / 2 ; i ++)
         {
-            line(i * 2.0f, height, i * 2.0f, height - fft.getBand(i) * 5.0f);
+            // line(i * 2.0f, height, i * 2.0f, height - fft.getBand(i) * 5.0f);
 
             if (fft.getBand(i) > fft.getBand(highestIndex))
             {
@@ -62,14 +67,20 @@ public class Audio2 extends PApplet{
         }
 
         float freq = fft.indexToFreq(highestIndex);
+
+        String pitch = ps.spell(freq);
         fill(255);
         textSize(20);
         text("Freq: " + freq, 100, 100);
+        text(pitch,100,200);
 
-        float y = map(freq, 1000.0f, 2500.0f, height, 0);
+        float y = map(freq, 0.0f, 1174.66f, 0, half);
         lerpedY = lerp(lerpedY, y, 0.1f);
-        circle(200, y, 50);
-        circle(300, lerpedY, 50);
+        float c = map(freq,0,1174.66f,0,255);
+        stroke(c,255,255);
+        fill(c,255,255);
+        circle(400, 500, lerpedY);
+        circle(600, 500, lerpedY);
         
 
 
