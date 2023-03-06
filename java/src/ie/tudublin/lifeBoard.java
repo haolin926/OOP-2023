@@ -49,6 +49,19 @@ public class lifeBoard {
             }
         }
     }
+    public void render2()
+    {
+
+        for(int row = 0; row <size; row++)
+        {
+            for(int col = 0;col<size;col++)
+            {
+                float c = (next[row][col] == true) ? 255:0;
+                p.fill(c);
+                p.rect(col*cellwidth, row*cellwidth, cellwidth, cellwidth);
+            }
+        }
+    }
     public void applyrules()
     {
         int count;
@@ -66,14 +79,15 @@ public class lifeBoard {
                 //live
                 if(borad[row][col])
                 {
-                    if(count < 2 || count > 3)
-                    {
-                        next[row][col] = false;
-                    }
-                    else
+                    if(count == 2 || count == 3)
                     {
                         next[row][col] = true;
                     }
+                    else
+                    {
+                        next[row][col] = false;
+                    }
+
                 }
                 //dead
                 else if(borad[row][col] == false)
@@ -83,15 +97,18 @@ public class lifeBoard {
                         next[row][col] = true;
                     }
                 }
+
             }
         }
         tmp = borad;
         borad = next;
         next = tmp;
+        
+        
     }
     public boolean getcell(int row,int col)
     {
-        if(row >= 0 && row <this.size && col >= 0 && col <= size)
+        if(row >= 0 && row <this.size && col >= 0 && col < size)
         {
             return borad[row][col];
         }
@@ -107,9 +124,9 @@ public class lifeBoard {
         {
             for(int j = -1; j < 1; j++)
             {
-                if(!(i ==0) && (j == 0))
+                if(!((i ==0) && (j == 0)))
                 {
-                    if(getcell(i, j))
+                    if(getcell(row+i, col+j))
                     {
                         count++;
                     }
