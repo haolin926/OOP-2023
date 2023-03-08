@@ -78,19 +78,6 @@ public class lifeBoard {
             }
         }
     }
-    public void render2()
-    {
-
-        for(int row = 0; row <size; row++)
-        {
-            for(int col = 0;col<size;col++)
-            {
-                float c = (next[row][col] == true) ? 255:0;
-                p.fill(c);
-                p.rect(col*cellwidth, row*cellwidth, cellwidth, cellwidth);
-            }
-        }
-    }
     public void applyrules()
     {
         boolean[][] tmp;
