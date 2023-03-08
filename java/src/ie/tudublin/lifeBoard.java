@@ -64,7 +64,6 @@ public class lifeBoard {
     }
     public void applyrules()
     {
-        int count;
         boolean[][] tmp;
         for(int row = 0; row < size; row++)
         {
@@ -75,6 +74,7 @@ public class lifeBoard {
                 // n =2||3 live
 
                 //n = 3 die -> live
+                int count;
                 count = countCells(row, col);
                 //live
                 if(borad[row][col])
@@ -95,6 +95,10 @@ public class lifeBoard {
                     if(count == 3)
                     {
                         next[row][col] = true;
+                    }
+                    else
+                    {
+                        next[row][col] = false;
                     }
                 }
 
@@ -120,11 +124,11 @@ public class lifeBoard {
     public int countCells(int row,int col)
     {
         int count =0;
-        for(int i = -1; i < +1 ; i++)
+        for(int i = -1; i <= 1 ; i++)
         {
-            for(int j = -1; j < 1; j++)
+            for(int j = -1; j <= 1; j++)
             {
-                if(!((i ==0) && (j == 0)))
+                if(!(i ==0 && j == 0))
                 {
                     if(getcell(row+i, col+j))
                     {
