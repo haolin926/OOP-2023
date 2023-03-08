@@ -35,6 +35,35 @@ public class lifeBoard {
             }
         }
     }
+    public void clear()
+    {
+        for(int row = 0;row<size;row++)
+        {
+            for(int col = 0;col<size;col++)
+            {
+                borad[row][col] = false;
+            }
+        }
+    }
+    public void cross()
+    {
+        for(int row = 0;row<size;row++)
+        {
+            for(int col = 0;col<size;col++)
+            {
+                // if(row == p.height / 2 || col == p.width / 2)
+                // {
+                //     borad[row][col] = true;
+                // }
+                borad[row][col] = false;
+            }
+        }
+        for(int row = 0;row<size;row++)
+        {
+            borad[row][row] = true;
+            borad[row][size - row - 1] = true;
+        }
+    }
 
     public void render()
     {
