@@ -67,13 +67,21 @@ public class lifeBoard {
 
     public void render()
     {
-
+        float c;
         for(int row = 0; row <size; row++)
         {
             for(int col = 0;col<size;col++)
             {
-                float c = (borad[row][col] == true) ? 255:0;
-                p.fill(c);
+                if(borad[row][col])
+                {
+                    c = p.map(row,0,size/4,0,255);
+                    c %= 255;
+                    p.fill(c,255,255);
+                }
+                else
+                {
+                    p.noFill();
+                }
                 p.rect(col*cellwidth, row*cellwidth, cellwidth, cellwidth);
             }
         }

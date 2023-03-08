@@ -17,6 +17,12 @@ public class Life extends PApplet
 		board.randomise();
 		
 	}
+	public void mouseDragged()
+	{
+		int row = (int)(mouseY / board.cellwidth);
+		int col = (int)(mouseX / board.cellwidth);
+		board.borad[row][col] = true;
+	}
 
 	public void keyPressed()
 	{
