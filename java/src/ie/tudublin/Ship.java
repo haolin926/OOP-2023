@@ -4,9 +4,9 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 public class Ship {
-    private PVector pos;
+    protected PVector pos;
     private PVector forward;
-    private PApplet p;
+    protected PApplet p;
 
     public Ship(float x, float y, float size, int c, PApplet p)
     {
@@ -44,9 +44,12 @@ public class Ship {
     public void setSize(float size) {
         this.size = size;
     }
+    public PApplet getP() {
+        return p;
+    }
     private float rot;
-    private int c;
-    private float size;
+    protected int c;
+    protected float size;
     private float halfSize;
 
     public void move()
