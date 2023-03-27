@@ -64,6 +64,13 @@ public class Ship {
                 pos.y -= forward.y;
             }
 
+            if(p.key == ' ')
+            {
+                PVector inFront = PVector.add(pos,PVector.mult(forward,20));
+                Bullet b = new Bullet(inFront.x,inFront.y,p,rot,c);
+
+                ((YASC)p).bullets.add(b);
+            }
         }
     }
 
