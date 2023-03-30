@@ -1,5 +1,6 @@
 package ie.tudublin;
 
+import jogamp.graph.font.typecast.ot.table.LangSys;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -15,7 +16,7 @@ public class Ship {
         this.size = size;
         this.halfSize = size / 2;
         this.c = c;       
-        this.p = p;  
+        this.p = p;
     }
 
 
@@ -49,6 +50,12 @@ public class Ship {
     private float size;
     private float halfSize;
 
+    int fireRate = 5;
+    int toPass = 1000/fireRate;
+    int ellapsed = 1000;
+    int timeDelta;
+
+
     public void move()
     {
         forward.x = PApplet.sin(rot);
@@ -77,8 +84,9 @@ public class Ship {
             pos.x -= forward.x;
             pos.y -= forward.y;
         }
-        if (yasc.keys[' '])
+        if (yasc.keys[' '] && ellapsed >= toPass)
         {
+            ellapsed = 0;
             PVector inFront = PVector.add(pos,
                 PVector.mult(forward, 30)
                 );  
@@ -87,8 +95,13 @@ public class Ship {
 
             ((YASC)p).bullets.add(b);
         }
+        int now = p.millis();
+        timeDelta = now - last;
+        ellapsed += timeDelta;
+        last = now;
     }
 
+    int last = 0;
     public void render()
     {
         p.pushMatrix();
