@@ -100,6 +100,7 @@ public class YASC extends PApplet
 	{	
 		fill(0, 20);
 		noStroke();
+		rectMode(PApplet.CORNER);
 		rect(0, 0, width, height);		
 		
 		for(int i = gameObjects.size() - 1 ; i >= 0 ; i --)
