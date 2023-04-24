@@ -1,5 +1,6 @@
 package ie.tudublin;
 
+import processing.core.PApplet;
 import processing.core.PVector;
 
 public class HealthPowerup extends GameObject implements PowerUp{
