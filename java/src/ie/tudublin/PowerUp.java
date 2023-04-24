@@ -1,7 +1,7 @@
 package ie.tudublin;
 
 public interface PowerUp {
-    public void applyTo(Ship s);
-    
+    //public void applyTo(Ship s);
+
     
 }

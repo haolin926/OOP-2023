@@ -45,11 +45,9 @@ public class YASC extends PApplet
 	public void setup() {
 		Ship ship = new Ship(width / 2, height / 2, 50, 70, this);
 		Ship ship1 = new Ship(100, 50, 50, 6, this);
-		HealthPowerUp hpu = new HealthPowerUp(60, 100, 0, 255, this);
 
 		gameObjects.add(ship);
 		gameObjects.add(ship1);
-		gameObjects.add(hpu);
 		
 		gameObjects.add(new HealthPowerup(60, 100, 0, 255, this));
 		

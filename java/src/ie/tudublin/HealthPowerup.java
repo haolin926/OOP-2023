@@ -18,11 +18,11 @@ public class HealthPowerup extends GameObject implements PowerUp{
         
     }
 
-    @Override
-    public void applyTo(Ship s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'applyTo'");
-    }
+    // @Override
+    // public void applyTo(Ship s) {
+    //     // TODO Auto-generated method stub
+    //     throw new UnsupportedOperationException("Unimplemented method 'applyTo'");
+    // }
 
     float speed = 1;
 
